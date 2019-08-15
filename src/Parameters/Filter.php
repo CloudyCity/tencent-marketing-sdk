@@ -13,9 +13,7 @@ namespace MrSuperLi\Tencent\Ads\Parameters;
 
 // filtering=[{"field":"system_status", "operator": "EQUALS", "values":["AD_STATUS_PENDING"]}, {"field":"adgroup_name", "operator": "CONTAINS", "values": ["广告"]}]
 
-use Illuminate\Contracts\Support\Arrayable;
-
-class Filter implements Arrayable
+class Filter
 {
 
     /**

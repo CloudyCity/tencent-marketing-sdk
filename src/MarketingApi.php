@@ -32,7 +32,6 @@ use MrSuperLi\Tencent\Ads\Exception\InvalidResourceException;
 use MrSuperLi\Tencent\Ads\Parameters\Builder;
 use Doctrine\Common\Collections\ArrayCollection;
 use GuzzleHttp\Client;
-use Illuminate\Contracts\Support\Arrayable;
 
 
 class MarketingApi
@@ -298,7 +297,7 @@ class MarketingApi
 
         $method = $action === 'get' ? 'get' : 'post';
 
-        if ($params instanceof Arrayable) {
+        if (is_object($params) && method_exists($params, 'toArray')) {
             $params = $params->toArray();
         }
 

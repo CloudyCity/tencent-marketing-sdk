@@ -10,9 +10,8 @@ namespace MrSuperLi\Tencent\Ads\Parameters;
 
 
 use Carbon\Carbon;
-use Illuminate\Contracts\Support\Arrayable;
 
-class TimeRange implements Arrayable
+class TimeRange
 {
     /**
      * 开始时间

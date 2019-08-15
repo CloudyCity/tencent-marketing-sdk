@@ -11,9 +11,8 @@ namespace MrSuperLi\Tencent\Ads\Parameters;
 
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Illuminate\Contracts\Support\Arrayable;
 
-class Builder extends ArrayCollection implements Arrayable
+class Builder extends ArrayCollection
 {
 
     /**
