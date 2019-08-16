@@ -28,7 +28,12 @@
 
 ## 1. 使用
 
-### 1.1 基础使用
+### 1.1 授权认证
+> 独立为一个依赖库
+
+https://github.com/MrSuperLi/oauth2-qq-ads
+
+### 1.2 基础使用
 
 ```php
 use MrSuperLi\Tencent\Ads\Managers\AdManager;
@@ -43,7 +48,7 @@ $api->setSandbox(false); // 关闭沙箱模式
 $api->setFields(['field1', 'field2']); // 自定义查询字段
 ```
 
-### 1.2 获取所有每日报表
+### 1.3 获取所有每日报表
 ```php
 
 use MrSuperLi\Tencent\Ads\Reports\DailyReport;
@@ -81,7 +86,7 @@ foreach ($api->getAllRecordIterator($params) as $pageRescords) {
 
 ```
 
-### 1.3 获取所有广告
+### 1.4 获取所有广告
 
 ```php
 
