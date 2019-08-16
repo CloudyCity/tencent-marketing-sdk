@@ -5,7 +5,7 @@
 
 
 - 腾讯广告 Marketing API
-    - [ ] Oauth2 授权认证 单独一个库
+    - [x] Oauth2 授权认证 单独一个库
     - [ ] Advertisers 账号管理
     - [ ] Assets 营销资产
       - [x] Pages 落地页
