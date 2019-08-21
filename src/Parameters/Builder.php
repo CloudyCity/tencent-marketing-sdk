@@ -132,7 +132,7 @@ class Builder extends ArrayCollection
     public function toArray()
     {
         return array_map(function ($value) {
-            if ($value instanceof Arrayable) {
+            if (is_object($value) && method_exists($value, 'toArray')) {
                 return $value->toArray();
             } else {
                 return $value;
