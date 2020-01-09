@@ -15,13 +15,19 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Builder extends ArrayCollection
 {
 
+    protected $is_multipart = false;
+
     /**
      * 工厂函数
      *
      * @return Builder
      */
     public static function make() {
-        return new static();
+        if ($params instanceof static) {
+            return $params;
+        }
+
+        return new static($params);
     }
 
     /**
@@ -70,6 +76,52 @@ class Builder extends ArrayCollection
     public function set($key, $value)
     {
         parent::set($key, $value);
+
+        return $this;
+    }
+
+    /**
+     * 设置表单数据
+     *
+     * @param $key
+     * @param $value
+     * @return Builder
+     */
+    public function multipart($key, $value)
+    {
+        $this->is_multipart = true;
+
+        return $this->set($key, $value);
+    }
+
+    /**
+     * @param $field
+     * @param $file
+     * @param $filename
+     * @return $this
+     */
+    public function file($field, $file, $filename = '')
+    {
+        if (!$file) {
+            return $this;
+        }
+
+        if (is_string($file)) {
+
+            if (!$filename) {
+                $filename = basename($filename);
+            }
+
+            $file = fopen($file, 'r');
+        }
+
+        if (is_resource($file)) {
+            $this->multipart($field, [
+                'name' => $field,
+                'contents' => $file,
+                'filename' => $filename,
+            ]);
+        }
 
         return $this;
     }
@@ -127,9 +179,40 @@ class Builder extends ArrayCollection
     }
 
     /**
-     * {@inheritDoc}
+     * 生成表单数据
+     *
+     * @return array
      */
-    public function toArray()
+    protected function toMultipart()
+    {
+        $results = [];
+        foreach (parent::toArray() as $field => $value) {
+            if (is_object($value) && method_exists($value, 'toArray')) {
+                $results[] = [
+                    'name' => $field,
+                    'contents' => $value->toArray(),
+                ];
+            } else {
+                if (is_array($value) && isset($value['name']) && isset($value['contents'])) {
+                    $results[] = $value;
+                } else {
+                    $results[] = [
+                        'name' => $field,
+                        'contents' => $value
+                    ];
+                }
+            }
+        }
+
+        return $results;
+    }
+
+    /**
+     * 生成普通数组
+     *
+     * @return array
+     */
+    protected function _toArray()
     {
         return array_map(function ($value) {
             if (is_object($value) && method_exists($value, 'toArray')) {
@@ -138,6 +221,28 @@ class Builder extends ArrayCollection
                 return $value;
             }
         }, parent::toArray());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function toArray()
+    {
+        if ($this->isMultipart()) {
+            return $this->toMultipart();
+        } else {
+            return $this->_toArray();
+        }
+    }
+
+    /**
+     * 数据类型是否为表单类型
+     *
+     * @return bool
+     */
+    public function isMultipart()
+    {
+        return $this->is_multipart;
     }
 
 }

@@ -215,23 +215,14 @@ class MarketingApi
      *
      * @param $method
      * @param $url
-     * @param $params
-     * @param array $headers
+     * @param array $options
      * @return ArrayCollection
      * @throws \Exception
      */
-    protected function _request($method, $url, $params, $headers = []) {
+    protected function _request($method, $url, $options) {
         $client = new Client([ 'timeout' => 1000 ]);
 
         $method = strtolower($method);
-
-        $options = [ 'headers' => $headers, 'query' => $this->getBaseQueryParams() ];
-
-        if ($method === 'get') {
-            $options['query'] += $params;
-        } else {
-            $options['form_params'] = $params;
-        }
 
         $response = $client->request($method, $url, $options);
         // 获取登陆后显示的页面
@@ -288,6 +279,7 @@ class MarketingApi
      * @throws InvalidResourceException
      */
     public function request($action, $params, $headers = []) {
+        $params = Builder::make($params);
 
         if (! $this->checkAction($action)) {
             throw new InvalidActionException("资源 {$this->getResourceName()} 不支持操作: {$action}, 请查看官方文档");
@@ -297,11 +289,17 @@ class MarketingApi
 
         $method = $action === 'get' ? 'get' : 'post';
 
-        if (is_object($params) && method_exists($params, 'toArray')) {
-            $params = $params->toArray();
+        $options = [ 'headers' => $headers, 'query' => $this->getBaseQueryParams() ];
+
+        if ($params->isMultipart()) {
+            $options['multipart'] = $params->toArray();
+        } else if ($method === 'get') {
+            $options['query'] += $params->toArray();
+        } else {
+            $options['form_params'] = $params;
         }
 
-        return $this->_request($method, $url, $params, $headers);
+        return $this->_request($method, $url, $options);
     }
 
     /**
