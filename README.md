@@ -1,5 +1,12 @@
 ## Tencent Marketing SDK
 
+[![Latest Version on Packagist][ico-version]][link-packagist]
+[![Software License][ico-license]](LICENSE.md)
+[![Build Status][ico-travis]][link-travis]
+<!--[![StyleCI][ico-styleci]][link-styleci]-->
+[![Quality Score][ico-code-quality]][link-code-quality]
+[![Total Downloads][ico-downloads]][link-downloads]
+
 > Now support v1.1
 
 This repo forked from `MrSuperLi/tencent-marketing-api-php-sdk`. 
@@ -156,3 +163,20 @@ $resourceClient = Factory::getClient('new_resource', $advertiserId, $accessToken
 
 ## License
 MIT
+
+
+[ico-version]: https://img.shields.io/packagist/v/cloudycity/tencent-marketing-sdk.svg?style=flat-square
+[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/cloudycity/tencent-marketing-sdk/master.svg?style=flat-square
+[ico-code-coverage]: https://img.shields.io/scrutinizer/coverage/g/cloudycity/tencent-marketing-sdk.svg?style=flat-square
+[ico-styleci]: https://styleci.io/repos/xxx/shield?branch=master
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/cloudycity/tencent-marketing-sdk.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/cloudycity/tencent-marketing-sdk.svg?style=flat-square
+
+[link-packagist]: https://packagist.org/packages/cloudycity/tencent-marketing-sdk
+[link-travis]: https://travis-ci.org/cloudycity/tencent-marketing-sdk
+[link-code-coverage]: https://scrutinizer-ci.com/g/cloudycity/tencent-marketing-sdk/code-structure
+[link-styleci]: https://styleci.io/repos/xxx
+[link-code-quality]: https://scrutinizer-ci.com/g/cloudycity/tencent-marketing-sdk
+[link-downloads]: https://packagist.org/cloudycity/tencent-marketing-sdk
+[link-author]: https://github.com/cloudycity
