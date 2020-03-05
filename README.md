@@ -1,148 +1,158 @@
-## 腾讯广告 API
-> 文档： https://developers.e.qq.com/docs/start
+## Tencent Marketing SDK
 
-> 本SDK能使用所有接口。下面打勾的是已经单独实现，没有打勾的可以使用通用实例
+> Now support v1.1
 
+This repo forked from `MrSuperLi/tencent-marketing-api-php-sdk`. 
 
-- 腾讯广告 Marketing API
-    - [x] Oauth2 授权认证 单独一个库
-    - [ ] Advertisers 账号管理
-    - [ ] Assets 营销资产
-      - [x] Pages 落地页
-    - [ ] Managers 广告管理相关接口
-      - [x] AdGroupManager 广告组管理
-      - [x] AdManager 广告管理
-      - [x] CampaignManager 推广计划管理
-    - [ ] Reports 数据洞察相关接口
-      - [x] DailyReport 每日报表
-      - [x] HourlyReport 每小时报表
-    - [ ] AssistTools 辅助工具相关接口
-    - [ ] UserActions 用户行为相关接口
-    - [ ] CustomAudiences 用户人群相关接口
-    - [ ] CustomTags 用户标签相关接口
-    - [ ] UserProperties 用户属性相关接口
+Modified the following：
+1. Integrate authorization.
+2. Pass `advertiser_id` when instantiate the client.
+3. Use member properties as client to request the API.
+4. Follow PSR-2.
 
-# 安装
+# Installation
 
-`composer install mrsuperli/tencent-marketing-api-php-sdk`
+`composer install cloudycity/tencent-marketing-sdk`
 
-## 1. 使用
+## Usage
 
-### 1.1 授权认证
-> 独立为一个依赖库
+The structure of SDK:
 
-https://github.com/MrSuperLi/oauth2-qq-ads
+- `Auth`: the client which to get or refresh token.
 
-### 1.2 基础使用
+- `Client`: the main invoker which to get resource client.
+
+- `BaseClient`: resource client which to request api.
+
+- `Factory`: get resource client in special case.
+
+### Authorize
 
 ```php
-use MrSuperLi\Tencent\Ads\Managers\AdManager;
 
-$accessToken = 'xxx';
+use CloudyCity\TencentMarketingSDK\Auth;
+use CloudyCity\TencentMarketingSDK\Kernel\Exceptions\Exception;
 
-$api = new AdManager($accessToken);
-$api->setSandbox(); // 开启沙箱模式
+$clientId = '';
+$clientSecret = '';
+$authCode = '';
+$redirectUri = '';
 
-$api->setSandbox(false); // 关闭沙箱模式
+$auth = new Auth($clientId, $clientSecret);
 
-$api->setFields(['field1', 'field2']); // 自定义查询字段
+try {
+    $res = $auth->getTokens($authCode, $redirectUri);
+    $refreshToken = $res['data']['refresh_token'];
+    
+    $res = $auth->refreshTokens($refreshToken);
+} catch (Exception $e) {
+    //
+}
 ```
 
-### 1.3 获取所有每日报表
+### Common
+
+All resource names are member properties of `Client` In the currently supported version.
+You can call these properties to get `BaseClient` instance which is the exactly instance to request api.
+
 ```php
 
-use MrSuperLi\Tencent\Ads\Reports\DailyReport;
-use MrSuperLi\Tencent\Ads\Parameters\Builder;
+use CloudyCity\TencentMarketingSDK\Client;
+use CloudyCity\TencentMarketingSDK\Kernel\Http\Parameters\Params;
+use CloudyCity\TencentMarketingSDK\Kernel\Exceptions\Exception;
 
-// 授权登录获得的 accessToken
-$accessToken = 'xxxxx';
-// 账号
-$account = 'xxxx';
-// 开始日期
-$start = '2019-08-01';
-// 结束日期
-$end = '2019-08-15';
+$advertiserId = '';
+$accessToken = '';
 
-$api = new DailyReport($accessToken);
+// You can passing third param to set response type.
+// Support types: array (default) / object / collection / raw (json string) 
+$client = new Client($advertiserId, $accessToken);
 
-// 构造查询参数
-$params = Builder::make()->groupBy('adgroup_id', 'date')
-    ->setDateRange($start, $end)
+// Use `Params` to build params.
+$params = Params::make()->setDateRange('2020-01-01', '2020-01-07')
     ->set('level', 'REPORT_LEVEL_ADGROUP')
-    ->set('account_id', $account);
+    ->groupBy('adgroup_id', 'date')
+    ->orderBy('cost', 'desc');
 
-// 每一页数据。因为这里使用生成器的方式
-foreach ($api->getAllRecordIterator($params) as $pageRescords) {
+$filter = $params->getFilter()
+    ->eq('adgroup_id', 'xxx');
 
-    if ($pageRescords instanceof \Exception) {
-        echo '获取失败:', $reports->getMessage();
-        continue;
-    }
+$params->setFilter($filter);
 
-    foreach($pageRescords as $record) {
-        // 每一条数据
-    }
+// Or use array
+$params = [
+    'date_range' => [
+        'start_date' => '2020-01-01',
+        'end_date' => '2020-01-07',
+    ],
+    'level' => 'REPORT_LEVEL_ADGROUP',
+    'group_by' => [
+        'adgroup_id', 
+        'date'
+    ],
+    'order_by' => [
+        'sort_field' => 'cost', 
+        'sort_type' => 'DESCENDING'
+    ],
+    'filtering' => [
+        [
+            'adgroup_id',
+            'EQUALS',
+            'xxx'
+        ]
+    ]
+];
+
+try {
+    $res = $client->daily_reports->get($params);
+} catch (Exception $e) {
+    //
 }
-
 ```
 
-### 1.4 获取所有广告
+### Generator
+
+`BaseClient::getAllPages()` implement page turning logic by `Generator`.
 
 ```php
 
-use MrSuperLi\Tencent\Ads\Managers\AdManager;
+use CloudyCity\TencentMarketingSDK\Client;
+use CloudyCity\TencentMarketingSDK\Kernel\Exceptions\Exception;
 
-$api = new AdManager($accessToken);
+$advertiserId = '';
+$accessToken = '';
+$client = new Client($advertiserId, $accessToken);
 
-$builder = new Builder();
-$builder->set('account_id', 'xxx');
-$builder->getFilter()->gtEqual('created_time', time() - 86400);
-$builder->getFilter()->ltEqual('created_time', time());
-
-foreach ($api->getAllRecordIterator($builder) as $pageRescords) {
-    // 同上
+try {
+    foreach ($client->campaigns->getAllPages() as $page) {
+        foreach ($page as $record) {
+            var_dump($record);
+        }
+    }
+} catch (Exception $e) {
+    //
 }
-
-// 获取第一页
-$api->get($builder);
-
 ```
 
-## 2 增删改
+### Factory
+
+If the SDK update lags behind the API update, new resources which do not exist in the member properties of `Client` class may appear. 
+You can use `Factory` class to obtain the `BaseClient` instance, but i recommend you open a issue let me create a new member properties for `Client`.
 
 ```php
-use MrSuperLi\Tencent\Ads\Managers\AdManager;
 
-$accessToken = 'xxx';
+use CloudyCity\TencentMarketingSDK\Factory;
 
-$api = new AdManager($accessToken);
+$advertiserId = '';
+$accessToken = '';
 
-$builder = Builder:make()
-    ->set('field1', 'value1')
-    ->set('field2', 'value2');
-
-$api->update($builder); // 更新
-$api->add($builder); // 新增
-$api->delete($builder); // 删除
+$resourceClient = Factory::getClient('new_resource', $advertiserId, $accessToken);
 ```
 
-## 3. 其他接口
-> 因为接口众多，目前并没有把所有接口都一一实现，但是 SDK 同样支持这些接口的请求
+## Contributors
+- @CloudyCity
+- @MrSuperLi [MrSuperLi/tencent-marketing-api-php-sdk](https://github.com/MrSuperLi/tencent-marketing-api-php-sdk)
 
-```php
-use MrSuperLi\Tencent\Ads\ApiFactory;
-use MrSuperLi\Tencent\Ads\Resources;
 
-// 授权登录获得的 accessToken
-$accessToken = 'xxxxx';
-
-// 获取订单数据, 第二个参数指定对应资源
-$api = ApiFactory::factory($accessToken, Resources::ECOMMERCE_ORDER);
-
-$builder = Builder:make()
-    ->set('field1', 'value1')
-    ->set('field2', 'value2');
-
-// 对资源进行具体操作
-$page1 = $api->get($builder);
-```
+## License
+MIT
