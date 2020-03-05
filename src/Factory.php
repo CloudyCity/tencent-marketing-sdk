@@ -1,7 +1,7 @@
 <?php
 
 
-namespace CloudyCity\TencentMarketingSdk;
+namespace CloudyCity\TencentMarketingSDK;
 
 use CloudyCity\TencentMarketingSDK\Kernel\BaseClient;
 

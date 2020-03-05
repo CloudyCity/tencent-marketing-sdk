@@ -1,7 +1,7 @@
 <?php
 
 
-namespace CloudyCity\TencentMarketingSdk\Advertiser;
+namespace CloudyCity\TencentMarketingSDK\Advertiser;
 
 use CloudyCity\TencentMarketingSDK\Kernel\BaseClient;
 use CloudyCity\TencentMarketingSDK\Resources;
