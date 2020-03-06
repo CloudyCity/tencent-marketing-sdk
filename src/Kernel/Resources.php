@@ -5,10 +5,10 @@ namespace CloudyCity\TencentMarketingSDK;
 class Resources
 {
     /**
-     * Account management
+     * Account management.
+     *
      * @see https://developers.e.qq.com/docs/api/account
      */
-
     const ADVERTISER = 'advertiser';
 
     const QUALIFICATION = 'qualifications';
@@ -24,10 +24,10 @@ class Resources
     const WECHAT_FUNDS = 'wechat_funds';
 
     /**
-     * Marketing assets
+     * Marketing assets.
+     *
      * @see https://developers.e.qq.com/docs/api/business_assets
      */
-
     const PROMOTED_OBJECTS = 'promoted_objects';
 
     const PAGES = 'pages';
@@ -45,10 +45,10 @@ class Resources
     const DYNAMIC_AD_IMAGES = 'dynamic_ad_images';
 
     /**
-     * Advertising management
+     * Advertising management.
+     *
      * @see https://developers.e.qq.com/docs/api/adsmanagement
      */
-
     const CAMPAIGNS = 'campaigns';
 
     const AD_GROUPS = 'adgroups';
@@ -78,10 +78,10 @@ class Resources
     const LEADS = 'leads';
 
     /**
-     * Tools
+     * Tools.
+     *
      * @see https://developers.e.qq.com/docs/api/tools
      */
-
     const TARGETING_TAGS = 'targeting_tags';
 
     const AD_CREATIVE_TEMPLATES = 'adcreative_templates';
@@ -107,10 +107,10 @@ class Resources
     const SYSTEM_STATUS = 'system_status';
 
     /**
-     * User action
+     * User action.
+     *
      * @see https://developers.e.qq.com/docs/api/user_data
      */
-
     const USER_ACTION_SETS = 'user_action_sets';
 
     const USER_ACTION_SET_REPORTS = 'user_action_set_reports';
@@ -118,10 +118,10 @@ class Resources
     const USER_ACTIONS = 'user_actions';
 
     /**
-     * Audiences
+     * Audiences.
+     *
      * @see https://developers.e.qq.com/docs/api/audiences
      */
-
     const CUSTOM_AUDIENCES = 'custom_audiences';
 
     const CUSTOM_AUDIENCE_FILES = 'custom_audience_files';
@@ -129,25 +129,26 @@ class Resources
     const CUSTOM_AUDIENCE_ESTIMATIONS = 'custom_audience_estimations';
 
     /**
-     * User tags
+     * User tags.
+     *
      * @see https://developers.e.qq.com/docs/api/custom_tags
      */
-
     const CUSTOM_TAGS = 'custom_tags';
 
     const CUSTOM_TAG_FILES = 'custom_tag_files';
 
     /**
-     * User property
+     * User property.
+     *
      * @see https://developers.e.qq.com/docs/api/user_property
      */
-
     const USER_PROPERTY_SETS = 'user_property_sets';
 
     const USER_PROPERTIES = 'user_properties';
 
     /**
      * @param $resourceName
+     *
      * @return bool
      */
     public static function checkResource($resourceName)

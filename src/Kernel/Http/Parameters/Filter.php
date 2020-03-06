@@ -19,7 +19,7 @@ class Filter
     const OP_CONTAINS = 'CONTAINS';
 
     /**
-     * filter data
+     * filter data.
      *
      * @var array
      */
@@ -31,6 +31,7 @@ class Filter
      * @param $field
      * @param $values
      * @param $operator
+     *
      * @return $this
      */
     protected function set($field, $values, $operator)
@@ -45,6 +46,7 @@ class Filter
      *
      * @param $field
      * @param $values
+     *
      * @return Filter
      */
     public function eq($field, $values)
@@ -57,6 +59,7 @@ class Filter
      *
      * @param $field
      * @param $values
+     *
      * @return Filter
      */
     public function lte($field, $values)
@@ -69,6 +72,7 @@ class Filter
      *
      * @param $field
      * @param $values
+     *
      * @return Filter
      */
     public function gte($field, $values)
@@ -81,6 +85,7 @@ class Filter
      *
      * @param $field
      * @param $values
+     *
      * @return Filter
      */
     public function lt($field, $values)
@@ -93,6 +98,7 @@ class Filter
      *
      * @param $field
      * @param $values
+     *
      * @return Filter
      */
     public function gt($field, $values)
@@ -105,6 +111,7 @@ class Filter
      *
      * @param $field
      * @param $values
+     *
      * @return Filter
      */
     public function in($field, $values)
@@ -117,6 +124,7 @@ class Filter
      *
      * @param $field
      * @param $values
+     *
      * @return Filter
      */
     public function contains($field, $values)
@@ -135,9 +143,9 @@ class Filter
 
         foreach ($this->data as list($field, $operator, $values)) {
             $result[] = [
-                'field' => $field,
+                'field'    => $field,
                 'operator' => $operator,
-                'values' => $values,
+                'values'   => $values,
             ];
         }
 

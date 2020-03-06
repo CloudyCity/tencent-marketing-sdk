@@ -73,19 +73,21 @@ class Auth
     /**
      * @param $authCode
      * @param $redirectUri
-     * @return array|Kernel\Http\Response|\Doctrine\Common\Collections\ArrayCollection|object|\Psr\Http\Message\ResponseInterface
+     *
      * @throws AuthException
      * @throws Kernel\Exceptions\Exception
      * @throws Kernel\Exceptions\InvalidArgumentException
+     *
+     * @return array|Kernel\Http\Response|\Doctrine\Common\Collections\ArrayCollection|object|\Psr\Http\Message\ResponseInterface
      */
     public function getTokens($authCode, $redirectUri)
     {
         $params = [
-            'client_id' => $this->getClientId(),
-            'client_secret' => $this->getClientSecret(),
-            'grant_type' => 'authorization_code',
+            'client_id'          => $this->getClientId(),
+            'client_secret'      => $this->getClientSecret(),
+            'grant_type'         => 'authorization_code',
             'authorization_code' => $authCode,
-            'redirect_uri' => $redirectUri,
+            'redirect_uri'       => $redirectUri,
         ];
 
         return $this->get('oauth/token', $params);
@@ -93,17 +95,19 @@ class Auth
 
     /**
      * @param $refreshToken
-     * @return array|Kernel\Http\Response|\Doctrine\Common\Collections\ArrayCollection|object|\Psr\Http\Message\ResponseInterface
+     *
      * @throws AuthException
      * @throws Kernel\Exceptions\Exception
      * @throws Kernel\Exceptions\InvalidArgumentException
+     *
+     * @return array|Kernel\Http\Response|\Doctrine\Common\Collections\ArrayCollection|object|\Psr\Http\Message\ResponseInterface
      */
     public function refreshTokens($refreshToken)
     {
         $params = [
-            'client_id' => $this->getClientId(),
+            'client_id'     => $this->getClientId(),
             'client_secret' => $this->getClientSecret(),
-            'grant_type' => 'refresh_token',
+            'grant_type'    => 'refresh_token',
             'refresh_token' => $refreshToken,
         ];
 
@@ -113,10 +117,12 @@ class Auth
     /**
      * @param $url
      * @param array $params
-     * @return array|Kernel\Http\Response|\Doctrine\Common\Collections\ArrayCollection|object|\Psr\Http\Message\ResponseInterface
+     *
      * @throws AuthException
      * @throws Kernel\Exceptions\Exception
      * @throws Kernel\Exceptions\InvalidArgumentException
+     *
+     * @return array|Kernel\Http\Response|\Doctrine\Common\Collections\ArrayCollection|object|\Psr\Http\Message\ResponseInterface
      */
     private function get($url, array $params)
     {

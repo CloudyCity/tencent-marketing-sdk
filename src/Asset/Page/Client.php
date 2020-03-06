@@ -10,7 +10,7 @@ class Client extends BaseClient
     protected $resource = Resources::PAGES;
 
     protected $fields = [
-        'page_id', 'page_name', 'preview_url', 'created_time', 'last_modified_time', 'promoted_object_id', 'page_type'
+        'page_id', 'page_name', 'preview_url', 'created_time', 'last_modified_time', 'promoted_object_id', 'page_type',
     ];
 
     /**

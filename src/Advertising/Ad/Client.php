@@ -11,6 +11,6 @@ class Client extends BaseClient
 
     protected $fields = [
         'campaign_id', 'adgroup_id', 'ad_id', 'ad_name', 'adcreative', 'configured_status', 'system_status',
-        'is_deleted', 'is_dynamic_creative', 'created_time', 'last_modified_time'
+        'is_deleted', 'is_dynamic_creative', 'created_time', 'last_modified_time',
     ];
 }

@@ -15,6 +15,6 @@ class Client extends BaseClient
         'automatic_site_enabled', 'promoted_object_type', 'promoted_object_id', 'created_time', 'last_modified_time',
         'share_content_spec', 'dynamic_adcreative_spec', 'is_deleted', 'is_dynamic_creative',
         'multi_share_optimization_enabled', 'component_id', 'online_enabled', 'revised_adcreative_spec', 'category',
-        'label'
+        'label',
     ];
 }

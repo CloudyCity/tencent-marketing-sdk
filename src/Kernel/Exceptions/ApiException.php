@@ -22,10 +22,10 @@ class ApiException extends Exception
     /**
      * HttpException constructor.
      *
-     * @param string $message
+     * @param string                                   $message
      * @param \Psr\Http\Message\ResponseInterface|null $response
-     * @param mixed $formattedResponse
-     * @param int|null $code
+     * @param mixed                                    $formattedResponse
+     * @param int|null                                 $code
      */
     public function __construct($message, ResponseInterface $response = null, $formattedResponse = null, $code = null)
     {
