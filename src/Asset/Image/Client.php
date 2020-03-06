@@ -11,7 +11,7 @@ class Client extends BaseClient
 
     protected $fields = [
         'image_id', 'width', 'height', 'file_size', 'type', 'signature', 'source_signature', 'preview_url',
-        'source_type', 'create_time', 'last_modified_time'
+        'source_type', 'create_time', 'last_modified_time',
     ];
 
     /**

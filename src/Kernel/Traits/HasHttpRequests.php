@@ -118,10 +118,11 @@ trait HasHttpRequests
      *
      * @param string $url
      * @param string $method
-     * @param array $options
+     * @param array  $options
+     *
+     * @throws Exception
      *
      * @return \Psr\Http\Message\ResponseInterface
-     * @throws Exception
      */
     public function request($url, $method = 'GET', array $options = [])
     {

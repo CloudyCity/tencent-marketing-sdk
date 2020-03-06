@@ -32,11 +32,11 @@ class TimeRange
         $this->end($end);
     }
 
-
     /**
      * Set start time.
      *
      * @param $start
+     *
      * @return $this
      */
     public function start($start)
@@ -52,6 +52,7 @@ class TimeRange
      * Set end time.
      *
      * @param $end
+     *
      * @return $this
      */
     public function end($end)
@@ -70,11 +71,11 @@ class TimeRange
      */
     protected function checkTimeRange()
     {
-        if (! ($this->start instanceof Carbon)) {
+        if (!($this->start instanceof Carbon)) {
             throw new \Exception('开始时间不能为空');
         }
 
-        if (! ($this->end instanceof  Carbon)) {
+        if (!($this->end instanceof  Carbon)) {
             throw new \Exception('结束时间不能为空');
         }
     }
@@ -88,15 +89,16 @@ class TimeRange
     {
         return [
             'start_time' => $this->start->getTimestamp(),
-            'end_time' => $this->end->getTimestamp(),
+            'end_time'   => $this->end->getTimestamp(),
         ];
     }
 
     /**
      * Check timeCheck time and get the instance as an array.
      *
-     * @return array
      * @throws \Exception
+     *
+     * @return array
      */
     public function toArray()
     {

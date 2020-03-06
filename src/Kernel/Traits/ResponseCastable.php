@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Psr\Http\Message\ResponseInterface;
 
 /**
- * Trait ResponseCastable from easywechat
+ * Trait ResponseCastable from easywechat.
  */
 trait ResponseCastable
 {
@@ -36,9 +36,11 @@ trait ResponseCastable
 
     /**
      * @param ResponseInterface $response
-     * @param string $type
-     * @return array|Response|ArrayCollection|object|ResponseInterface
+     * @param string            $type
+     *
      * @throws InvalidArgumentException
+     *
+     * @return array|Response|ArrayCollection|object|ResponseInterface
      */
     protected function castResponseToType(ResponseInterface $response, $type = 'array')
     {
@@ -69,8 +71,10 @@ trait ResponseCastable
     /**
      * @param $response
      * @param string $type
-     * @return array|Response|ArrayCollection|object|ResponseInterface
+     *
      * @throws InvalidArgumentException
+     *
+     * @return array|Response|ArrayCollection|object|ResponseInterface
      */
     protected function detectAndCastResponseToType($response, $type = 'array')
     {

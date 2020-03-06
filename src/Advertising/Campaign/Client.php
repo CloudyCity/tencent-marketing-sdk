@@ -11,6 +11,6 @@ class Client extends BaseClient
 
     protected $fields = [
         'campaign_id', 'campaign_name', 'configured_status', 'campaign_type', 'promoted_object_type', 'daily_budget',
-        'budget_reach_date', 'created_time', 'last_modified_time', 'speed_mode', 'is_deleted'
+        'budget_reach_date', 'created_time', 'last_modified_time', 'speed_mode', 'is_deleted',
     ];
 }

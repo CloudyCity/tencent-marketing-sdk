@@ -22,9 +22,9 @@ trait HasSubInvoker
     /**
      * @param $name
      *
-     * @return mixed
      * @throws Exception
      *
+     * @return mixed
      */
     public function __get($name)
     {
