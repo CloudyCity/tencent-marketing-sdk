@@ -14,7 +14,7 @@ class Client extends BaseClient
         'audio_bit_rate', 'file_size', 'type', 'signature', 'system_status', 'description', 'preview_url',
         'create_time', 'last_modified_time', 'video_profile_name', 'audio_sample_rate', 'max_keyframe_interval',
         'min_keyframe_interval', 'sample_aspect_ratio', 'audio_profile_name', 'scan_type', 'image_duration_millisecond',
-        'audio_duration_millisecond', 'source_type'
+        'audio_duration_millisecond', 'source_type',
     ];
 
     /**

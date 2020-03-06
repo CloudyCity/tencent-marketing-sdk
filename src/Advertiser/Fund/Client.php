@@ -1,6 +1,5 @@
 <?php
 
-
 namespace CloudyCity\TencentMarketingSDK\Advertiser\Fund;
 
 use CloudyCity\TencentMarketingSDK\Kernel\BaseClient;

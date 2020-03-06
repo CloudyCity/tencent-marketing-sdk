@@ -6,9 +6,9 @@ use CloudyCity\TencentMarketingSDK\Kernel\Exceptions\ApiException;
 use CloudyCity\TencentMarketingSDK\Kernel\Exceptions\Exception;
 use CloudyCity\TencentMarketingSDK\Kernel\Exceptions\InvalidActionException;
 use CloudyCity\TencentMarketingSDK\Kernel\Exceptions\InvalidResourceException;
+use CloudyCity\TencentMarketingSDK\Kernel\Http\Parameters\Params;
 use CloudyCity\TencentMarketingSDK\Kernel\Traits\HasHttpRequests;
 use CloudyCity\TencentMarketingSDK\Kernel\Traits\HasSdkBaseInfo;
-use CloudyCity\TencentMarketingSDK\Kernel\Http\Parameters\Params;
 use CloudyCity\TencentMarketingSDK\Resources;
 
 class BaseClient
@@ -68,7 +68,6 @@ class BaseClient
      */
     protected $fields = [];
 
-
     /**
      * Client constructor.
      *
@@ -87,6 +86,7 @@ class BaseClient
      * Set Fields.
      *
      * @param array $fields
+     *
      * @return $this
      */
     public function setFields(array $fields)
@@ -110,11 +110,13 @@ class BaseClient
      * Set env.
      *
      * @param bool $sandbox
+     *
      * @return $this
      */
     public function setSandbox($sandbox = true)
     {
         $this->sandbox = boolval($sandbox);
+
         return $this;
     }
 
@@ -122,11 +124,13 @@ class BaseClient
      * Set version.
      *
      * @param $version
+     *
      * @return $this
      */
     public function setVersion($version)
     {
         $this->version = $version;
+
         return $this;
     }
 
@@ -165,16 +169,19 @@ class BaseClient
      *
      * @param $resource
      * @param bool $checkValid
-     * @return $this
+     *
      * @throws InvalidResourceException
+     *
+     * @return $this
      */
     public function setResource($resource, $checkValid = true)
     {
         if ($checkValid && !Resources::checkResource($resource)) {
-            throw new InvalidResourceException('Invalid resource:' . $resource);
+            throw new InvalidResourceException('Invalid resource:'.$resource);
         }
 
         $this->resource = $resource;
+
         return $this;
     }
 
@@ -192,13 +199,15 @@ class BaseClient
      * Get url for request.
      *
      * @param $action
-     * @return string
+     *
      * @throws InvalidResourceException
+     *
+     * @return string
      */
     public function getRequestUrl($action)
     {
         if (!Resources::checkResource($resource = $this->getResource())) {
-            throw new InvalidResourceException('Invalid resource:' . $resource);
+            throw new InvalidResourceException('Invalid resource:'.$resource);
         }
 
         return sprintf('%s/%s/%s/%s', $this->getBaseUrl(), $this->getVersion(), $resource, $action);
@@ -210,18 +219,20 @@ class BaseClient
      * @param $action
      * @param array $params
      * @param array $headers
-     * @param bool $returnRaw
-     * @return \Psr\Http\Message\ResponseInterface
+     * @param bool  $returnRaw
+     *
      * @throws ApiException
      * @throws Exception
      * @throws Exceptions\InvalidArgumentException
      * @throws InvalidActionException
      * @throws InvalidResourceException
+     *
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function request($action, $params = [], $headers = [], $returnRaw = false)
     {
         if (!$this->checkAction($action)) {
-            throw new InvalidActionException("resource {$this->getResource()} does not support action:" .
+            throw new InvalidActionException("resource {$this->getResource()} does not support action:".
                 "{$action}, please check the official documentation");
         }
 
@@ -266,6 +277,7 @@ class BaseClient
      * Check Action for resource.
      *
      * @param $action
+     *
      * @return bool
      */
     public function checkAction($action)
@@ -287,12 +299,14 @@ class BaseClient
      * Get resource.
      *
      * @param mixed $params
-     * @return \Psr\Http\Message\ResponseInterface
+     *
      * @throws ApiException
      * @throws Exception
      * @throws Exceptions\InvalidArgumentException
      * @throws InvalidActionException
      * @throws InvalidResourceException
+     *
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function get($params = [])
     {
@@ -303,12 +317,14 @@ class BaseClient
      * Add resource.
      *
      * @param $params
-     * @return \Psr\Http\Message\ResponseInterface
+     *
      * @throws ApiException
      * @throws Exception
      * @throws Exceptions\InvalidArgumentException
      * @throws InvalidActionException
      * @throws InvalidResourceException
+     *
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function add($params)
     {
@@ -319,12 +335,14 @@ class BaseClient
      * Update resource.
      *
      * @param $params
-     * @return \Psr\Http\Message\ResponseInterface
+     *
      * @throws ApiException
      * @throws Exception
      * @throws Exceptions\InvalidArgumentException
      * @throws InvalidActionException
      * @throws InvalidResourceException
+     *
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function update($params)
     {
@@ -335,12 +353,14 @@ class BaseClient
      * Delete resource.
      *
      * @param $params
-     * @return \Psr\Http\Message\ResponseInterface
+     *
      * @throws ApiException
      * @throws Exception
      * @throws Exceptions\InvalidArgumentException
      * @throws InvalidActionException
      * @throws InvalidResourceException
+     *
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function delete($params)
     {
@@ -351,13 +371,15 @@ class BaseClient
      * Get all records by Generator. Each iteration of the loop is a response of singe page.
      *
      * @param Params $params
-     * @param int $pageSize
-     * @return \Generator
+     * @param int    $pageSize
+     *
      * @throws ApiException
      * @throws Exception
      * @throws Exceptions\InvalidArgumentException
      * @throws InvalidActionException
      * @throws InvalidResourceException
+     *
+     * @return \Generator
      */
     public function getAllPages(Params $params = null, $pageSize = 100)
     {

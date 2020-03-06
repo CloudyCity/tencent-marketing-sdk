@@ -1,6 +1,5 @@
 <?php
 
-
 namespace CloudyCity\TencentMarketingSDK;
 
 use CloudyCity\TencentMarketingSDK\Kernel\BaseClient;
@@ -62,21 +61,20 @@ use CloudyCity\TencentMarketingSDK\Kernel\BaseInvoker;
  * @property \CloudyCity\TencentMarketingSDK\Kernel\BaseClient $custom_tags
  * @property \CloudyCity\TencentMarketingSDK\Kernel\BaseClient $user_property_sets
  * @property \CloudyCity\TencentMarketingSDK\Kernel\BaseClient $user_properties
- *
  */
 class Client extends BaseInvoker
 {
     protected $providers = [
-        'advertiser' => \CloudyCity\TencentMarketingSDK\Advertiser\Client::class,
-        'funds' => \CloudyCity\TencentMarketingSDK\Advertiser\Fund\Client::class,
-        'campaigns' => \CloudyCity\TencentMarketingSDK\Advertising\Campaign\Client::class,
-        'adgroups' => \CloudyCity\TencentMarketingSDK\Advertising\AdGroup\Client::class,
-        'adcreatives' => \CloudyCity\TencentMarketingSDK\Advertising\AdCreative\Client::class,
+        'advertiser'        => \CloudyCity\TencentMarketingSDK\Advertiser\Client::class,
+        'funds'             => \CloudyCity\TencentMarketingSDK\Advertiser\Fund\Client::class,
+        'campaigns'         => \CloudyCity\TencentMarketingSDK\Advertising\Campaign\Client::class,
+        'adgroups'          => \CloudyCity\TencentMarketingSDK\Advertising\AdGroup\Client::class,
+        'adcreatives'       => \CloudyCity\TencentMarketingSDK\Advertising\AdCreative\Client::class,
         'dynamic_creatives' => \CloudyCity\TencentMarketingSDK\Advertising\DynamicCreative\Client::class,
-        'ads' => \CloudyCity\TencentMarketingSDK\Advertising\Ad\Client::class,
-        'targetings' => \CloudyCity\TencentMarketingSDK\Advertising\Targeting\Client::class,
-        'daily_reports' => \CloudyCity\TencentMarketingSDK\Report\Daily\Client::class,
-        'hourly_reports' => \CloudyCity\TencentMarketingSDK\Report\Hourly\Client::class,
+        'ads'               => \CloudyCity\TencentMarketingSDK\Advertising\Ad\Client::class,
+        'targetings'        => \CloudyCity\TencentMarketingSDK\Advertising\Targeting\Client::class,
+        'daily_reports'     => \CloudyCity\TencentMarketingSDK\Report\Daily\Client::class,
+        'hourly_reports'    => \CloudyCity\TencentMarketingSDK\Report\Hourly\Client::class,
     ];
 
     /**
@@ -86,8 +84,10 @@ class Client extends BaseInvoker
      *
      * @param $resource
      * @param $checkSource
-     * @return BaseClient
+     *
      * @throws \CloudyCity\TencentMarketingSDK\Kernel\Exceptions\InvalidResourceException
+     *
+     * @return BaseClient
      */
     public function factory($resource, $checkSource = true)
     {

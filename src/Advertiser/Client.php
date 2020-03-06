@@ -1,6 +1,5 @@
 <?php
 
-
 namespace CloudyCity\TencentMarketingSDK\Advertiser;
 
 use CloudyCity\TencentMarketingSDK\Kernel\BaseClient;
@@ -16,6 +15,6 @@ class Client extends BaseClient
         'corporate_image_name', 'corporate_image_logo', 'system_industry_id', 'customized_industry', 'introduction_url',
         'industry_qualification_image_id_list', 'industry_qualification_image', 'ad_qualification_image_id_list',
         'ad_qualification_image', 'contact_person', 'contact_person_email', 'contact_person_telephone',
-        'contact_person_mobile', 'wechat_spec', 'websites', ''
+        'contact_person_mobile', 'wechat_spec', 'websites', '',
     ];
 }

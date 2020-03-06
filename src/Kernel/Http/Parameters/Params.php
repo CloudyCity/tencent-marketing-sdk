@@ -15,6 +15,7 @@ class Params extends ArrayCollection
      * Get instance.
      *
      * @param $params
+     *
      * @return Params
      */
     public static function make($params = [])
@@ -31,6 +32,7 @@ class Params extends ArrayCollection
      *
      * @param $field
      * @param string $direction
+     *
      * @return $this
      */
     public function orderBy($field, $direction = 'desc')
@@ -43,7 +45,7 @@ class Params extends ArrayCollection
 
         $orderBy[] = [
             'sort_field' => $field,
-            'sort_type' => $direction,
+            'sort_type'  => $direction,
         ];
 
         return $this->set($key, $orderBy);
@@ -75,7 +77,8 @@ class Params extends ArrayCollection
      * Set a param.
      *
      * @param string $key
-     * @param mixed $value
+     * @param mixed  $value
+     *
      * @return $this|void
      */
     public function set($key, $value)
@@ -90,6 +93,7 @@ class Params extends ArrayCollection
      *
      * @param $key
      * @param $value
+     *
      * @return Params
      */
     public function multipart($key, $value)
@@ -105,6 +109,7 @@ class Params extends ArrayCollection
      * @param $field
      * @param $file
      * @param $filename
+     *
      * @return $this
      */
     public function file($field, $file, $filename = '')
@@ -123,7 +128,7 @@ class Params extends ArrayCollection
 
         if (is_resource($file)) {
             $this->multipart($field, [
-                'name' => $field,
+                'name'     => $field,
                 'contents' => $file,
                 'filename' => $filename,
             ]);
@@ -203,6 +208,7 @@ class Params extends ArrayCollection
      * Set a filter param to the request.
      *
      * @param $filter
+     *
      * @return $this|void
      */
     public function setFilter($filter)
@@ -221,7 +227,7 @@ class Params extends ArrayCollection
         foreach (parent::toArray() as $field => $value) {
             if (is_object($value) && method_exists($value, 'toArray')) {
                 $results[] = [
-                    'name' => $field,
+                    'name'     => $field,
                     'contents' => $value->toArray(),
                 ];
             } else {
@@ -229,8 +235,8 @@ class Params extends ArrayCollection
                     $results[] = $value;
                 } else {
                     $results[] = [
-                        'name' => $field,
-                        'contents' => $value
+                        'name'     => $field,
+                        'contents' => $value,
                     ];
                 }
             }

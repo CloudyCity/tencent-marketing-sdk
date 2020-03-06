@@ -4,7 +4,6 @@ namespace CloudyCity\TencentMarketingSDK\Kernel\Http\Parameters;
 
 class DateRange extends TimeRange
 {
-
     /**
      * Get the instance as an array.
      *
@@ -14,7 +13,7 @@ class DateRange extends TimeRange
     {
         return [
             'start_date' => $this->start->toDateString(),
-            'end_date' => $this->end->toDateString(),
+            'end_date'   => $this->end->toDateString(),
         ];
     }
 }
