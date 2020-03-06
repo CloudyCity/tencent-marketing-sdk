@@ -169,12 +169,14 @@ MIT
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 [ico-travis]: https://img.shields.io/travis/cloudycity/tencent-marketing-sdk/master.svg?style=flat-square
 [ico-code-coverage]: https://img.shields.io/scrutinizer/coverage/g/cloudycity/tencent-marketing-sdk.svg?style=flat-square
+[ico-styleci]: https://styleci.io/repos/244580741/shield?branch=master
 [ico-code-quality]: https://img.shields.io/scrutinizer/g/cloudycity/tencent-marketing-sdk.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/cloudycity/tencent-marketing-sdk.svg?style=flat-square
 
 [link-packagist]: https://packagist.org/packages/cloudycity/tencent-marketing-sdk
 [link-travis]: https://travis-ci.org/cloudycity/tencent-marketing-sdk
 [link-code-coverage]: https://scrutinizer-ci.com/g/cloudycity/tencent-marketing-sdk/code-structure
+[link-styleci]: https://styleci.io/repos/244580741
 [link-code-quality]: https://scrutinizer-ci.com/g/cloudycity/tencent-marketing-sdk
 [link-downloads]: https://packagist.org/cloudycity/tencent-marketing-sdk
 [link-author]: https://github.com/cloudycity
