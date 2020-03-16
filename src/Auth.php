@@ -135,7 +135,7 @@ class Auth
     private function get($url, array $params)
     {
         $response = $this->request($url, 'GET', [
-            'form_params' => $params,
+            'query' => $params,
         ]);
 
         $result = $this->castResponseToType($response);
