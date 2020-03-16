@@ -41,6 +41,14 @@ class Auth
     /**
      * @return string
      */
+    public function getBaseUrl()
+    {
+        return $this->baseUrl;
+    }
+
+    /**
+     * @return string
+     */
     public function getClientId()
     {
         return $this->clientId;
