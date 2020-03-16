@@ -24,7 +24,7 @@
     },
     "autoload": {
         "psr-4": {
-            "CloudyCity\\TencentMarketingSdk\\": "src/"
+            "CloudyCity\\TencentMarketingSDK\\": "src/"
         },
         "files": [
             "src/Kernel/Support/Helpers.php"
