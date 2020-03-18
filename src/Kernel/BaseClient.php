@@ -365,7 +365,6 @@ class BaseClient
      * @param Params $params
      * @param int    $pageSize
      *
-     * @throws ApiException
      * @throws Exception
      * @throws Exceptions\InvalidArgumentException
      * @throws InvalidActionException
@@ -381,14 +380,18 @@ class BaseClient
         $page = $params->get('page') ?: 1;
         $params->set('page', $page);
 
+        $totalPage = 1;
+
         do {
-            $result = $this->get($params);
+            try {
+                $result = $this->get($params);
+                $data = $this->detectAndCastResponseToType($result, 'collection')->get('data');
+                $totalPage = $data['page_info']['total_page'];
 
-            $data = $this->detectAndCastResponseToType($result, 'collection')->get('data');
-
-            $totalPage = $data['page_info']['total_page'];
-
-            yield $result;
+                yield $result;
+            } catch (\Exception $e) {
+                yield $e;
+            }
 
             $params->set('page', ++$page);
         } while ($page <= $totalPage);
