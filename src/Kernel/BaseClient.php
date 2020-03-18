@@ -48,13 +48,6 @@ class BaseClient
     protected $sandbox = false;
 
     /**
-     * Access Token.
-     *
-     * @var string
-     */
-    protected $accessToken;
-
-    /**
      * Resource.
      *
      * @var string
@@ -236,15 +229,14 @@ class BaseClient
                 "{$action}, please check the official documentation");
         }
 
-        if (empty($this->middlewares)) {
-            $this->registerHttpMiddlewares();
-        }
-
         $method = $action === 'get' ? 'get' : 'post';
 
         $url = $this->getRequestUrl($action);
 
-        $options = ['headers' => $headers];
+        $options = [
+            'headers' => $headers,
+            'query' => $this->getBaseQuery()
+        ];
 
         $params = Params::make($params);
 
@@ -403,45 +395,17 @@ class BaseClient
     }
 
     /**
-     * Register Guzzle middlewares.
-     */
-    protected function registerHttpMiddlewares()
-    {
-        $this->pushMiddleware($this->accessTokenMiddleware(), 'access_token');
-        $this->pushMiddleware($this->advertiserIdMiddleware(), 'advertiser_id');
-    }
-
-    /**
-     * Attache access token to request unique.
+     * Get required auth info for request.
      *
-     * @return \Closure
+     * @return array
      */
-    protected function accessTokenMiddleware()
+    protected function getBaseQuery()
     {
-        return function ($handler) {
-            return function ($request, $options) use ($handler) {
-                $option['query']['access_token'] = $this->getAccessToken();
-                $option['query']['timestamp'] = time();
-                $option['query']['nonce'] = Support\generate_nonce();
-
-                return $handler($request, $options);
-            };
-        };
-    }
-
-    /**
-     * Attache access token to request query.
-     *
-     * @return \Closure
-     */
-    protected function advertiserIdMiddleware()
-    {
-        return function ($handler) {
-            return function ($request, $options) use ($handler) {
-                $option['form_params']['account_id'] = $this->getAdvertiserId();
-
-                return $handler($request, $options);
-            };
-        };
+        return [
+            'access_token' => $this->getAccessToken(),
+            'timestamp' => time(),
+            'nonce' => Support\generate_nonce(),
+            'account_id' => $this->getAdvertiserId(),
+        ];
     }
 }

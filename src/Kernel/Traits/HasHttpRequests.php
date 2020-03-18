@@ -130,10 +130,6 @@ trait HasHttpRequests
         $options = array_merge(self::$defaults, $options, ['handler' => $this->getHandlerStack()]);
         $options = $this->fixJsonIssue($options);
 
-        if (method_exists($this, 'getBaseUrl') && !is_null($this->baseUrl)) {
-            $options['base_uri'] = $this->getBaseUrl();
-        }
-
         try {
             $response = $this->getHttpClient()->request($method, $url, $options);
         } catch (GuzzleException $e) {
