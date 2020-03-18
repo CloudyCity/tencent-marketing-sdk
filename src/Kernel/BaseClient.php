@@ -248,7 +248,7 @@ class BaseClient
             $options['form_params'] = $params->toArray();
         }
 
-        $response = $this->performRequest($method, $url, $options);
+        $response = $this->performRequest($url, $method, $options);
 
         $responseType = $this->getResponseType();
 
