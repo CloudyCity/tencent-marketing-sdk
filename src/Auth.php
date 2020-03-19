@@ -22,7 +22,7 @@ class Auth
     /**
      * @var string
      */
-    protected $baseUrl = 'https://api.e.qq.com/';
+    protected $url = 'https://api.e.qq.com/oauth/token';
 
     /**
      * Auth constructor.
@@ -36,14 +36,6 @@ class Auth
         $this->setClientId($clientId);
         $this->setClientSecret($clientSecret);
         $this->setResponseType($responseType);
-    }
-
-    /**
-     * @return string
-     */
-    public function getBaseUrl()
-    {
-        return $this->baseUrl;
     }
 
     /**
@@ -98,7 +90,7 @@ class Auth
             'redirect_uri'       => $redirectUri,
         ];
 
-        return $this->get('oauth/token', $params);
+        return $this->get($this->url, $params);
     }
 
     /**
@@ -119,7 +111,7 @@ class Auth
             'refresh_token' => $refreshToken,
         ];
 
-        return $this->get('oauth/token', $params);
+        return $this->get($this->url, $params);
     }
 
     /**
