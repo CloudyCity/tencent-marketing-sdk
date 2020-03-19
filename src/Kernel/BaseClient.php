@@ -365,11 +365,6 @@ class BaseClient
      * @param Params $params
      * @param int    $pageSize
      *
-     * @throws Exception
-     * @throws Exceptions\InvalidArgumentException
-     * @throws InvalidActionException
-     * @throws InvalidResourceException
-     *
      * @return \Generator
      */
     public function getAllPages(Params $params = null, $pageSize = 100)
