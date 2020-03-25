@@ -363,32 +363,37 @@ class BaseClient
      * Get all records by Generator. Each iteration of the loop is a response of singe page.
      *
      * @param Params $params
-     * @param int    $pageSize
-     *
+     * @param int $pageSize
+     * @param bool $throwException
      * @return \Generator
+     * @throws \Exception
      */
-    public function getAllPages(Params $params = null, $pageSize = 100)
+    public function getAllPages(Params $params = null, $pageSize = 100, $throwException = true)
     {
-        $params = Params::make($params);
-        $params->set('page_size', $pageSize);
+        $__params = clone Params::make($params);
+        $__params->set('page_size', $pageSize);
 
         $page = $params->get('page') ?: 1;
-        $params->set('page', $page);
+        $__params->set('page', $page);
 
         $totalPage = 1;
 
         do {
             try {
-                $result = $this->get($params);
+                $result = $this->get($__params);
                 $data = $this->detectAndCastResponseToType($result, 'collection')->get('data');
                 $totalPage = $data['page_info']['total_page'];
 
                 yield $result;
             } catch (\Exception $e) {
-                yield $e;
+                if (!$throwException) {
+                    yield $e;
+                } else {
+                    throw $e;
+                }
             }
 
-            $params->set('page', ++$page);
+            $__params->set('page', ++$page);
         } while ($page <= $totalPage);
     }
 
