@@ -235,7 +235,7 @@ class BaseClient
 
         $options = [
             'headers' => $headers,
-            'query' => $this->getBaseQuery()
+            'query'   => $this->getBaseQuery(),
         ];
 
         $params = Params::make($params);
@@ -363,10 +363,12 @@ class BaseClient
      * Get all records by Generator. Each iteration of the loop is a response of singe page.
      *
      * @param Params $params
-     * @param int $pageSize
-     * @param bool $throwException
-     * @return \Generator
+     * @param int    $pageSize
+     * @param bool   $throwException
+     *
      * @throws \Exception
+     *
+     * @return \Generator
      */
     public function getAllPages(Params $params = null, $pageSize = 100, $throwException = true)
     {
@@ -406,9 +408,9 @@ class BaseClient
     {
         return [
             'access_token' => $this->getAccessToken(),
-            'timestamp' => time(),
-            'nonce' => Support\generate_nonce(),
-            'account_id' => $this->getAdvertiserId(),
+            'timestamp'    => time(),
+            'nonce'        => Support\generate_nonce(),
+            'account_id'   => $this->getAdvertiserId(),
         ];
     }
 }
