@@ -63,16 +63,16 @@ try {
 
 ### 基础调用
 
-广点通接口格式统一为: 资源/动作
+> 广点通接口格式统一为: `资源/动作`
 
-接口示例:
+**接口示例**
 
-funds/get 获取资金账户信息
-advertiser/update 更新广告主信息
+- `funds/get` 获取资金账户信息
+- `advertiser/update` 更新广告主信息
 
 资源对应`Client`对象中的属性，动作对应属性中的方法
 
-调用示例:
+**调用示例:**
 
 ```php
 $res = $client->funds->get();

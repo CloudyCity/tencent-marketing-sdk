@@ -63,17 +63,17 @@ try {
 
 ### Basic
 
-API standard path: resource/action
+API standard path: `resource/action`
 
-demo:
+**demo:**
 
-funds/get get fund info
-advertiser/update update advertiser
+- `funds/get` get fund info
+- `advertiser/update` update advertiser
 
 Resources correspond to attributes in the `Client` object.
 Actions correspond to functions in the attribute of `Client` object.
 
-demo:
+**demo:**
 ```php
 $res = $client->funds->get();
 $res = $client->advertiser->update($params);
