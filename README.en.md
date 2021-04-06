@@ -6,8 +6,23 @@
 [![StyleCI][ico-styleci]][link-styleci]
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
+[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
 English | [简体中文](./README.md)
+
+## 内容列表
+
+- [Introduction](#Introduction)
+- [Installation](#Installation)
+- [Usage](#Usage)
+	- [Authorization](#authorization)
+	- [Basic](#basic)
+	- [Request params & Response types](#request-params--response-types)
+	- [Paginator](#paginator)
+	- [Factory](#factory)
+- [Contributors](#contributors)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Introduction
 
@@ -27,7 +42,7 @@ Modified the following：
 
 `composer install cloudycity/tencent-marketing-sdk`
 
-## Structure
+## Usage
 
 - `Auth`: the client which to get or refresh token.
 
@@ -37,7 +52,7 @@ Modified the following：
 
 - `Factory`: get resource client in special case.
 
-### Authorize
+### Authorization
 
 ```php
 
@@ -74,6 +89,7 @@ Resources correspond to attributes in the `Client` object.
 Actions correspond to functions in the attribute of `Client` object.
 
 **demo:**
+
 ```php
 $res = $client->funds->get();
 $res = $client->advertiser->update($params);
@@ -136,7 +152,7 @@ try {
 }
 ```
 
-### Page Turner
+### Paginator
 
 `BaseClient::getAllPages()` implement page turning logic by `Generator`.
 
@@ -175,13 +191,19 @@ $accessToken = '';
 $resourceClient = Factory::getClient('new_resource', $advertiserId, $accessToken);
 ```
 
-## Contributors
-- @CloudyCity
-- @MrSuperLi [MrSuperLi/tencent-marketing-api-php-sdk](https://github.com/MrSuperLi/tencent-marketing-api-php-sdk)
+## Maintainers
 
+- @CloudyCity
+
+## Contributing
+
+Feel free to dive in! [Open an issue](https://github.com/CloudyCity/tencent-marketing-sdk/issues/new) or submit PRs.
+
+Standard Readme follows the [Contributor Covenant](http://contributor-covenant.org/version/1/3/0/) Code of Conduct.
 
 ## License
-MIT
+
+[MIT](LICENSE) © CloudyCity
 
 [ico-version]: https://img.shields.io/packagist/v/cloudycity/tencent-marketing-sdk.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square

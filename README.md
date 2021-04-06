@@ -6,8 +6,23 @@
 [![StyleCI][ico-styleci]][link-styleci]
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
+[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 
 简体中文 | [English](./README.en.md)
+
+## 内容列表
+
+- [简介](#简介)
+- [安装](#安装)
+- [使用说明](#使用说明)
+	- [授权](#授权)
+	- [基础调用](#基础调用)
+	- [请求参数与响应类型](#请求参数与响应类型)
+	- [自动翻页](#自动翻页)
+	- [工厂](#工厂)
+- [维护者](#维护者)
+- [如何贡献](#如何贡献)
+- [使用许可](#使用许可)
 
 ## 简介
 
@@ -15,7 +30,7 @@
 
 本仓库从 `MrSuperLi/tencent-marketing-api-php-sdk` 分支
 
-相较于原仓库上的改动：
+相较于原仓库上的改动:
 1. 集成授权
 2. 客户端传入`advertiser_id`参数
 3. 客户端按业务(资源)模块调用
@@ -27,7 +42,7 @@
 
 `composer install cloudycity/tencent-marketing-sdk`
 
-## SDK结构
+## 使用说明
 
 - `Auth`: 获取、刷新令牌
 
@@ -63,9 +78,9 @@ try {
 
 ### 基础调用
 
-> 广点通接口格式统一为: `资源/动作`
+广点通接口格式统一为: `资源/动作`
 
-**接口示例**
+**接口示例:**
 
 - `funds/get` 获取资金账户信息
 - `advertiser/update` 更新广告主信息
@@ -80,6 +95,7 @@ $res = $client->advertiser->update($params);
 ```
 
 ### 请求参数与响应类型
+
 ```php
 
 use CloudyCity\TencentMarketingSDK\Client;
@@ -174,13 +190,19 @@ $accessToken = '';
 $resourceClient = Factory::getClient('new_resource', $advertiserId, $accessToken);
 ```
 
-## Contributors
+## 维护者
+
 - @CloudyCity
-- @MrSuperLi [MrSuperLi/tencent-marketing-api-php-sdk](https://github.com/MrSuperLi/tencent-marketing-api-php-sdk)
 
+## 如何贡献
 
-## License
-MIT
+非常欢迎你的加入！[提一个 Issue](https://github.com/CloudyCity/tencent-marketing-sdk/issues/new) 或者提交一个 Pull Request。
+
+标准 Readme 遵循 [Contributor Covenant](http://contributor-covenant.org/version/1/3/0/) 行为规范。
+
+## 使用许可
+
+[MIT](LICENSE) © CloudyCity
 
 [ico-version]: https://img.shields.io/packagist/v/cloudycity/tencent-marketing-sdk.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
