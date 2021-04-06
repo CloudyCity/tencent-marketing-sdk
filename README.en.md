@@ -1,4 +1,4 @@
-# 广点通SDK
+# Tencent Marketing SDK
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
@@ -7,37 +7,37 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-简体中文 | [English](./README.en.md)
+English | [简体中文](./README.md)
 
-## 简介
+## Introduction
 
-> 当前支持的API版本: v1.1
+> Now support v1.1
 
-本仓库从 `MrSuperLi/tencent-marketing-api-php-sdk` 分支
+This repo forked from `MrSuperLi/tencent-marketing-api-php-sdk`.
 
-相较于原仓库上的改动：
-1. 集成授权
-2. 客户端传入`advertiser_id`参数
-3. 客户端按业务(资源)模块调用
-4. 请求参数支持数组
-5. 支持多种响应类型
-6. 使用PSR-2
+Modified the following：
+1. Integrate authorization.
+2. Pass `advertiser_id` when instantiate the client.
+3. Use member properties as client to request the API.
+4. Request param support array.
+5. Support multiple response types.
+6. Follow PSR-2.
 
-## 安装
+## Installation
 
 `composer install cloudycity/tencent-marketing-sdk`
 
-## SDK结构
+## Structure
 
-- `Auth`: 获取、刷新令牌
+- `Auth`: the client which to get or refresh token.
 
-- `Client`: 调用各资源的主客户端
+- `Client`: the main invoker which to get resource client.
 
-- `BaseClient`: 发起动作的资源
+- `BaseClient`: resource client which to request api.
 
-- `Factory`: 用于获取自定义资源实例的工厂
+- `Factory`: get resource client in special case.
 
-### 授权
+### Authorize
 
 ```php
 
@@ -61,25 +61,26 @@ try {
 }
 ```
 
-### 基础调用
+### Basic
 
-广点通接口格式统一为: 资源/动作
+API standard path: resource/action
 
-接口示例:
+demo:
 
-funds/get 获取资金账户信息
-advertiser/update 更新广告主信息
+funds/get get fund info
+advertiser/update update advertiser
 
-资源对应`Client`对象中的属性，动作对应属性中的方法
+Resources correspond to attributes in the `Client` object.
+Actions correspond to functions in the attribute of `Client` object.
 
-调用示例:
-
+demo:
 ```php
 $res = $client->funds->get();
 $res = $client->advertiser->update($params);
 ```
 
-### 请求参数与响应类型
+### Request params & Response types
+
 ```php
 
 use CloudyCity\TencentMarketingSDK\Client;
@@ -89,11 +90,11 @@ use CloudyCity\TencentMarketingSDK\Kernel\Exceptions\Exception;
 $advertiserId = '';
 $accessToken = '';
 
-// 可以传入第三个参数来指定响应类型
-// 支持的响应类型: array (default) / object / collection / raw (json string)
+// You can passing third param to set response type.
+// Support types: array (default) / object / collection / raw (json string)
 $client = new Client($advertiserId, $accessToken);
 
-// 使用`Params`类来构建参数
+// Use `Params` to build params.
 $params = Params::make()->setDateRange('2020-01-01', '2020-01-07')
     ->set('level', 'REPORT_LEVEL_ADGROUP')
     ->groupBy('adgroup_id', 'date')
@@ -104,7 +105,7 @@ $filter = $params->getFilter()
 
 $params->setFilter($filter);
 
-// 或使用数组构建参数
+// Or use array
 $params = [
     'date_range' => [
         'start_date' => '2020-01-01',
@@ -135,9 +136,9 @@ try {
 }
 ```
 
-### 自动翻页
+### Page Turner
 
-`BaseClient::getAllPages()`通过[Generator](https://www.php.net/manual/zh/language.generators.overview.php)实现翻页逻辑.
+`BaseClient::getAllPages()` implement page turning logic by `Generator`.
 
 ```php
 
@@ -159,10 +160,10 @@ try {
 }
 ```
 
-### 工厂
+### Factory
 
-如果API更新出现了新的资源名称，但是SDK版本未更新，`Client`对象将找不到对应的成员属性。
-此时你可以通过工厂类获取一个`BaseClient`实例，建议同时提交新Issue让我给`Client`添加新的成员属性。
+If the SDK update lags behind the API update, new resources which do not exist in the member properties of `Client` class may appear.
+You can use `Factory` class to obtain the `BaseClient` instance, but i recommend you open a issue let me create a new member properties for `Client`.
 
 ```php
 
